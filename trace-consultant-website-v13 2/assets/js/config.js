@@ -2,7 +2,7 @@
 // This is the *anon* public key — safe to expose in client-side code as long as
 // Row Level Security policies are set up correctly (see /supabase/schema.sql).
 window.TRACE_CONFIG = {
-  supabaseUrl: "https://YOUR-PROJECT.supabase.co",
+  supabaseUrl: "https://relczynnwlcigxpftulz.supabase.co",
   supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlbGN6eW5ud2xjaWd4cGZ0dWx6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMzAyODYsImV4cCI6MjEwNTkwNjI4Nn0.RWdG3-iNaDgTEy5P4yjmVysmfPpWnxe9fm4xF3C9UGY",
   // v7: nomor WhatsApp (format 62…) untuk cadangan form kontak saat Supabase belum diisi atau gagal.
   whatsapp: "62895428298682",
