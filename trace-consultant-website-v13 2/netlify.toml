@@ -1,0 +1,17 @@
+[build]
+  publish = "."
+  command = ""
+
+# Nama file aset tidak di-hash, jadi hanya Three.js (versi terkunci) yang aman di-cache setahun.
+# File lain memakai default Netlify (revalidasi) supaya perubahan config.js, style.css, foto langsung terlihat.
+[[headers]]
+  for = "/assets/js/vendor/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"

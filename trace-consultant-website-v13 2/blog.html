@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog — TRACE Business Consultants</title>
+<meta name="description" content="Insight seputar finance, operasional, dan pertumbuhan bisnis F&B dari tim TRACE Business Consultants.">
+<link rel="icon" href="assets/img/tc-mark-ink.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap"><link rel="stylesheet" href="assets/css/tokens.css"><link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="site-frame">
+
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-mark"><img src="assets/img/tc-mark-white.png" alt=""></span>
+      <span class="nav-brand-name">TRACE Business Consultants</span>
+    </a>
+    <div class="nav-center">
+      <div class="nav-chip-group"><span>Finance &amp; HPP</span><span>Business Diagnosis</span></div>
+    </div>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <a href="index.html#kontak" class="nav-cta"><span class="dot">→</span> Booking Diagnosis</a>
+    </div>
+  </nav>
+
+  <header class="wrap blog-hero">
+    <div class="eyebrow">Blog</div>
+    <h1>Insight dari lapangan, bukan teori.</h1>
+  </header>
+
+  <main class="wrap post-list" id="post-list">
+    <div class="empty-state">Memuat tulisan...</div>
+  </main>
+
+  <footer class="site-footer wrap">
+    <span>© <span id="year"></span> TRACE Business Consultants.</span>
+    <div class="footer-links">
+      <a href="index.html#tentang-kami">Tentang</a>
+      <a href="index.html#layanan">Layanan</a>
+      <a href="index.html#kontak">Kontak</a>
+    </div>
+  </footer>
+</div>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script>
+(async function () {
+  const list = document.getElementById('post-list');
+  const { data, error } = await window.traceBlog.listPosts();
+  if (error || !data || data.length === 0) {
+    const wa = (window.TRACE_CONFIG && window.TRACE_CONFIG.whatsapp) || '';
+    list.innerHTML = '<div class="empty-state"><b>Tulisan pertama sedang disiapkan.</b>Sementara itu, ceritakan kondisi usaha kamu dan kami bantu membaca angkanya.<div class="es-actions">' + (wa ? '<a href="https://wa.me/' + wa + '?text=' + encodeURIComponent('Halo TRACE, saya mau konsultasi.') + '" target="_blank" rel="noopener">Tanya lewat WhatsApp</a>' : '') + '<a href="index.html#metode">Lihat cara kerja kami</a></div></div>';
+    return;
+  }
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const fmt = (d) => new Date(d).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
+  list.innerHTML = data.map(p => `
+    <a class="post-card" href="blog-post.html?slug=${encodeURIComponent(p.slug)}">
+      <img class="post-cover" src="${esc(p.cover_image_url || 'assets/img/tc-mark-ink.png')}" alt="" loading="lazy">
+      <span>
+        <h3>${esc(p.title)}</h3>
+        <p>${esc(p.excerpt)}</p>
+      </span>
+      <span class="post-date">${fmt(p.published_at)}</span>
+    </a>
+  `).join('');
+})();
+</script>
+</body>
+</html>

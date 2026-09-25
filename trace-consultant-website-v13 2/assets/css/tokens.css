@@ -1,0 +1,46 @@
+/* TRACE Business Consultants — design tokens (Teal Ledger + Saffron) */
+:root{
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Newsreader", "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+  --bg-outer: #e6ecea;
+  --bg: #f5f7f6;
+  --surface: #ffffff;
+  --surface-2: #eef2f1;
+
+  --ink: #0c1b1c;
+  --muted: #5f6b6a;
+  --faint: #9aa6a5;
+  --border: rgba(8,25,26,.09);
+  --border-soft: rgba(8,25,26,.05);
+
+  --accent-1: #17b3a0;
+  --accent-2: #0e7c72;
+  --accent-gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  --tint: #d5efe9;
+  --saffron: #f5b43c;
+
+  --positive: #0e7c72;
+  --dark: #08191a;
+  --dark-2: #0f2a2b;
+
+  --radius: 20px;
+  --radius-sm: 12px;
+  --shadow: 0 1px 2px rgba(8,25,26,.03);
+  --shadow-lift: 0 18px 44px -22px rgba(8,25,26,.28);
+  --shadow-card: 0 24px 60px -30px rgba(8,25,26,.35);
+
+  --ease: cubic-bezier(.2,.7,.3,1);
+  --ease-loop: cubic-bezier(.45,0,.55,1);
+  --zz: polygon(0 0,100% 0,100% calc(100% - 8px),93.75% 100%,87.5% calc(100% - 8px),81.25% 100%,75% calc(100% - 8px),68.75% 100%,62.5% calc(100% - 8px),56.25% 100%,50% calc(100% - 8px),43.75% 100%,37.5% calc(100% - 8px),31.25% 100%,25% calc(100% - 8px),18.75% 100%,12.5% calc(100% - 8px),6.25% 100%,0 calc(100% - 8px));
+}
+
+/* v10 — transisi antar halaman (Chrome/Edge/Safari baru; browser lain pindah halaman biasa) */
+@media (prefers-reduced-motion:no-preference){
+  @view-transition{navigation:auto}
+  ::view-transition-old(root){animation:vt-out .32s var(--ease) both}
+  ::view-transition-new(root){animation:vt-in .6s var(--ease) both}
+  @keyframes vt-out{to{opacity:0;transform:translateY(-1.5%) scale(.985)}}
+  @keyframes vt-in{from{opacity:0;transform:translateY(2%)}}
+}
